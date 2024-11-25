@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
+        <a href="{% url 'todo_create' %}">Add Todo</a>
+        <ul>
+            {% for todo in todos %}
+                <li>
+                    <a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a> -
+                    {{ todo.description }} -
+                    {% if todo.completed %}Completed{% else %}Not Completed{% endif %}
+                    <a href="{% url 'todo_edit' todo.pk %}">Edit</a>
+                    <a href="{% url 'todo_delete' todo.pk %}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
